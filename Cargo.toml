@@ -1,0 +1,10 @@
+[package]
+name = "featurebot"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+frankenstein = "0.22.0"
+caduceo = { git = "https://github.com/metalneox/caduceo", branch = "main" }
