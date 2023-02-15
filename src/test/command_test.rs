@@ -4,11 +4,11 @@
 #[cfg(test)]
 mod tests {
  
-    use crate::core::{command};
+    //use crate::core::{command};
     
     #[test]
     fn cmd1() {
-        //let commandi = command::Cmds{cmd:"!rot13",value:"prova"};
+        //let commandi = command::Cmds{cmd:"!rot13".to_string(),value:"prova".to_string()};
 
         //let result = commandi.run();
 

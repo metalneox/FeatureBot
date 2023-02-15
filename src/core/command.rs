@@ -1,6 +1,6 @@
-use std::{collections::HashMap, future::Future};
+use std::{collections::HashMap};
 
-use super::features::{screenshot, self};
+use super::features::{screenshot};
 
 /// Commands
 
