@@ -7,7 +7,7 @@ edition = "2021"
 
 [dependencies]
 frankenstein = "0.23.0"
-caduceo = { git = "https://github.com/metalneox/caduceo", branch = "main" }
+caduceo = { git = "https://github.com/metalneox/caduceo"}
 #caduceo = { path = "../Caduceo" }
 
 reqwest = "0.11.14"
