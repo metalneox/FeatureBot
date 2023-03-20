@@ -16,16 +16,7 @@ pub struct Cmds {
 }
 
 impl Cmds {      
-
-
     pub async fn run(self)-> Result<String,String>{
-  
-        //INFO: Due hashmap dove una con parametri e una senza quella senza ritornano semplice
-        //stringhe
-
-        // per funzioni non async
-        //let mut features_map: HashMap<String,fn(String)-> String> = HashMap::new();
-
         //per funzioni asyncrone
         let mut features_async: HashMap<String, AsyncFn> = HashMap::new();
 
@@ -35,7 +26,6 @@ impl Cmds {
         let mut features_sync: HashMap<String,fn(String)-> String> = HashMap::new();
         features_sync.insert("!rot13".to_string(), caduceo::crypto::ciphers::rot13 as fn(String) -> String);
 
-        //println!("{:#?}",self);
     
         if features_async.get(&self.cmd).is_some(){
             
@@ -44,27 +34,18 @@ impl Cmds {
                 //FIX: Controllare option
                 
                 if self.cmd == "!twitch" {
-                    
-                    println!("{}",self.cmd);
+                
                     let result = screenshot(self.value.unwrap()).await;
 
                     Ok(result)
 
                 }else{
-                    //let result = features_map.get(&self.cmd).unwrap()(self.value.unwrap());
-                    //return Ok(result);
-                    //
-                    Ok("prova".to_string())
- 
+                    Ok("prova".to_string()) 
                 }
-
-
            }else{
 
-                //let result = fet.get(&self.cmd).unwrap().to_string();
-
                 let result = "to".to_string();
-                return Ok(result);
+                Ok(result)
 
             }
             
