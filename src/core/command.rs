@@ -1,6 +1,6 @@
 use std::{collections::HashMap};
 
-use super::features::{screenshot};
+use super::features::{screenshot,chatgpt};
 
 use std::future::Future;
 use std::pin::Pin;
@@ -21,7 +21,11 @@ impl Cmds {
         let mut features_async: HashMap<String, AsyncFn> = HashMap::new();
 
         features_async.insert("!twitch".to_string(),Box::pin(async {screenshot("ciao".to_string());}));
-
+		//FIX: Dovrebbe andare ma le api non andavano troppe richieste
+		let prova = chatgpt("prova".to_string()).await;
+		println!("->{:#?}",prova);
+		
+		//println!("{:#?}",prova);
         //per funzioni sync
         let mut features_sync: HashMap<String,fn(String)-> String> = HashMap::new();
         features_sync.insert("!rot13".to_string(), caduceo::crypto::ciphers::rot13 as fn(String) -> String);
