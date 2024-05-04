@@ -7,6 +7,9 @@ use std::pin::Pin;
 
 type AsyncFn = Pin<Box<dyn Future<Output = ()> + Send>>;
 
+use serde_json::Value;
+//use async_std::task;
+
 /// Commands
 
 #[derive(Debug, PartialEq)]
@@ -26,9 +29,12 @@ impl Cmds {
                 screenshot("ciao".to_string());
             }),
         );
-        //FIX: Dovrebbe andare ma le api non andavano troppe richieste
-        let prova = ollama("Cosa sei tu?".to_string()).await;
-        println!("->{:#?}", prova);
+        features_async.insert(
+            "!gpt".to_string(),
+            Box::pin(async {
+                ollama("ciao".to_string());
+            }),
+        );
 
         //println!("{:#?}",prova);
         //per funzioni sync
@@ -47,6 +53,22 @@ impl Cmds {
                     let result = screenshot(self.value.unwrap()).await;
 
                     Ok(result)
+                } else if self.cmd == "!gpt" {
+                    let prova = ollama(self.value.unwrap()).await;
+
+                    let value_ollama = match prova {
+                        Ok(v) => v,
+                        Err(v) => "Erroraccio".to_string(),
+                    };
+                    //FIX: Check in caso di Err di value_ollama
+                    //FIX: Al momento ritornata una stringa non giusta
+                    let val: Value = serde_json::from_str(&value_ollama).unwrap();
+                    let result = val.get("response").and_then(|v| v.as_str()).unwrap_or("");
+                    println!("->{}", result.to_string());
+
+                    Ok(result.to_string())
+
+                    //Ok("zio boia".to_string())
                 } else {
                     Ok("prova".to_string())
                 }

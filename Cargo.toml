@@ -9,6 +9,7 @@ edition = "2021"
 #frankenstein = "0.23.0"
 caduceo = { git = "https://github.com/metalneox/caduceo" }
 #caduceo = { path = "../Caduceo" }
+tokio = { version = "1.8", features = ["rt-multi-thread", "macros"] }
 reqwest = { version = "0.12.4", features = ["blocking", "json"] }
 select = "0.6.0"
 serde_json = "1.0.116"
